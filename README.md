@@ -48,3 +48,8 @@ The features as of now are
 * google <search terms> will return a few google results
 * bot <question> will fetch the answer from wolfram alpha api
 * new twitter messages from your feed are automatically sent to the defined peer
+
+## Known Bugs ##
+
+* twitter module repeats tweets. This is more of a problem with the twitter python module rather than this code. Todo: prevent duplicate tweets using timestamp
+* chatting with oneself is buggy, I suppose. Not tested very much. No time :P
