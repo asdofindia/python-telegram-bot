@@ -7,19 +7,24 @@ This is a telegram bot written in python. It uses the CLI of telegram by vysheng
 
 ### Install and setup vysheng/tg ###
 Install [vysheng's tg cli](http://github.com/vysheng/tg)
+    
     git clone https://github.com/vysheng/tg.git && cd tg
     ./configure
     make
+
 Run that and configure an account
+    
     ./telegram -k tg-server.pub
     
 ### Install dependencies ###
 The twitter module requires [Python Twitter Tools](http://mike.verdone.ca/twitter/)
+    
     sudo easy_install twitter
     twitter authorize
 
 ### Download python-telegram-bot ###
 Clone this repository by doing
+    
     git clone https://github.com/asdofindia/python-telegram-bot.git && cd tg
     
 ### Configure python-telegram-bot ###
