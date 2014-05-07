@@ -122,24 +122,30 @@ def bot():
 			message=None
 			try:
 				if ((COLOR_BLUE+" >>>" in line) and (COLOR_BLUE+"[" in line)):
-					peer=line.split(COLOR_REDB)[1].split(COLOR_RED)[0]
+					#if you get change colour level errors, uncomment the below line, and comment the line below that.
+					#peer=line.split(COLOR_REDB)[1].split(COLOR_RED)[0]
+					peer=line.split(COLOR_RED)[1].split(COLOR_NORMAL)[0]
 					message=line.split(COLOR_BLUE+" >>> ")[1].split("\033")[0]
 					if not line.endswith("[0m\n"):
 						multiline=True
 				if ((COLOR_GREEN+" >>>" in line)):
 					group=line.split(COLOR_MAGENTA)[2].split(COLOR_NORMAL)[0]
-					peer=line.split(COLOR_REDB)[1].split(COLOR_RED)[0]
+					#For change colour level
+					#peer=line.split(COLOR_REDB)[1].split(COLOR_RED)[0]
+					peer=line.split(COLOR_RED)[1].split(COLOR_NORMAL)[0]
 					message=line.split(COLOR_GREEN+" >>> ")[1].strip(COLOR_NORMAL).split("\033")[0]
 					if not line.endswith("[0m\n"):
 						multiline=True
 				if ((COLOR_BLUE+" >>>" in line) and (COLOR_MAGENTA+"[" in line)):
 					group=line.split(COLOR_MAGENTA)[2].split(COLOR_NORMAL)[0]
-					peer=line.split(COLOR_REDB)[1].split(COLOR_RED)[0]
+					#for change colour level
+					#peer=line.split(COLOR_REDB)[1].split(COLOR_RED)[0]
+					peer=line.split(COLOR_RED)[1].split(COLOR_NORMAL)[0]
 					message=line.split(COLOR_BLUE+" >>> ")[1].strip(COLOR_NORMAL).split("\033")[0]
 					if not line.endswith("[0m\n"):
 						multiline=True
 			except IndexError:
-				pass
+				print "Error: Change colour levels"
 		if( ((group is not None) or (peer is not None)) and (message is not None) and (not multiline)):
 			AI(group,peer,message)
 	
