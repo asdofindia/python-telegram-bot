@@ -125,7 +125,7 @@ def bot():
 	
 	global pathtotg
 	global proc
-	proc=subprocess.Popen([pathtotg+'bin/telegram','-k',pathtotg+'tg-server.pub'],stdin=subprocess.PIPE,stdout=subprocess.PIPE)
+	proc=subprocess.Popen([pathtotg+'bin/telegram-cli','-k',pathtotg+'tg-server.pub'],stdin=subprocess.PIPE,stdout=subprocess.PIPE)
 	lastmessage=None
 	multiline=False
 	for line in iter(proc.stdout.readline,''):
