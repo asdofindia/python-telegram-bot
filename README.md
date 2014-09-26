@@ -25,7 +25,7 @@ The twitter module requires [Python Twitter Tools](http://mike.verdone.ca/twitte
 ### Download python-telegram-bot ###
 Clone this repository by doing
     
-    git clone https://github.com/asdofindia/python-telegram-bot.git && cd tg
+    git clone https://github.com/asdofindia/python-telegram-bot.git && cd python-telegram-bot
     
 ### Configure python-telegram-bot ###
 There are a few changes to be made to the source code before it can start working.
