@@ -38,7 +38,7 @@ In wolfram.py, put an appid by signing up at wolfram developers
 ### Disabling modules ###
 If you don't want some of these modules, just remove them from the modules array in callmodule function
 If you want to disable twitter, just comment out all lines with 'twitbot' in it in the main function.
-
+If you want to disable robotic replies turn chattybot to False
 
 ## Features ##
 The features as of now are
@@ -48,6 +48,7 @@ The features as of now are
 * google <search terms> will return a few google results
 * bot <question> will fetch the answer from wolfram alpha api
 * new twitter messages from your feed are automatically sent to the defined peer
+* talks random shit based on pandorabots web service thanks to chatterbotapi
 
 ## Known Bugs ##
 

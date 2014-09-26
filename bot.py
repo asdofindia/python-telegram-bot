@@ -7,11 +7,19 @@ from wolfram import wolfram
 from threading import Thread
 import time
 
+from BeautifulSoup import BeautifulSoup
+from chatterbotapi import ChatterBotFactory, ChatterBotType
+
 
 pathtotg='~/tg/'    #include trailing slash. I don't know if '~' notation works
 lastmessage=None
 proc=None
+chattybot=True
 
+
+factory = ChatterBotFactory()
+bot1 = factory.create(ChatterBotType.PANDORABOTS, 'b0dafd24ee35a477')
+botsessions={}
 
 #this function somehow works in preventing duplicate messages
 def mymessage(message):
@@ -21,7 +29,7 @@ def mymessage(message):
 	else:
 		return False
 
-def callmodule(message):
+def callmodule(message,peer):
 	message=message.lower()
 	modules=["wiki","bot","google"]  #Add module name here so that the for loop below works
 	for module in modules:
@@ -40,6 +48,21 @@ def callmodule(message):
 				if (reply=="noidea"):
 					reply="tough. I'll google that\n"+google(message)
 				return reply
+	global chattybot
+	if chattybot:
+		global botsessions
+		global bot1
+		if peer not in botsessions:
+			botsessions[peer]=bot1.create_session()
+		reply = botsessions[peer].think(message)
+		VALID_TAGS = ['br']
+		soup = BeautifulSoup(reply)
+		for tag in soup.findAll(True):
+			if tag.name not in VALID_TAGS:
+				tag.hidden = True
+		reply=soup.renderContents()
+		reply=reply.replace('<br />','\n')
+		return reply
 
 def AI(group,peer,message):
 	#uncomment for debug
@@ -53,7 +76,7 @@ def AI(group,peer,message):
 		replyrequired=True
 	if (message[:3].lower()=="bot"):
 		replyrequired=True
-	reply=callmodule(message)
+	reply=callmodule(message,peer)
 	if((message[:4]=="http") and (message.find(' ')==-1)):
 		t = lxml.html.parse(message)
 		reply = t.find(".//title").text
@@ -102,7 +125,7 @@ def bot():
 	
 	global pathtotg
 	global proc
-	proc=subprocess.Popen([pathtotg+'telegram','-k',pathtotg+'tg-server.pub'],stdin=subprocess.PIPE,stdout=subprocess.PIPE)
+	proc=subprocess.Popen([pathtotg+'bin/telegram','-k',pathtotg+'tg-server.pub'],stdin=subprocess.PIPE,stdout=subprocess.PIPE)
 	lastmessage=None
 	multiline=False
 	for line in iter(proc.stdout.readline,''):
